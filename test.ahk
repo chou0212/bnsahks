@@ -1,4 +1,5 @@
-#IfWinActive ahk_class LaunchUnrealUWindowsClient
+#IfWinExist ahk_class LaunchUnrealUWindowsClient
+DetectHiddenWindows, On
 
 ;抓取颜色函数，在上面脚本中调用。
 GetColor(x,y)
