@@ -87,12 +87,19 @@ yujianAuto:
         SendInput, f
         Sleep, 20
     }
+    if ( GetColor(1706, 740) != "0xFFFFFF" && isHanding != 1 ) ;(任务没接到, 分辨率 1080p)
+    {
+        getYongmeng()
+        Sleep, 20000
+    }
     ; 交任务
     if ( GetColor(1723, 431) == "0xB85F22" )
     {
+        isHanding := 1
         handYongmeng()
         Sleep, 1000
         getYongmeng()
+        isHanding := 0
     } 
 return
 
