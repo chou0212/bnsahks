@@ -14,16 +14,11 @@ getYongmeng() {
     Sleep, 500
     Send {Click 1037, 775}
     Sleep, 600
-    Send {Click}
-    Sleep, 600
-    Send {Click}
-    Sleep, 600
-    Send {Click}
-    Sleep, 600
-    Send {Click}
-    Sleep, 600
-    Send {Click}
-    Sleep, 600
+    Loop, 5
+    {
+        Send {Click}
+        Sleep, 600
+    }
     SendInput, f
     ToolTip, 接好咯
     Sleep, 1000
@@ -37,18 +32,11 @@ handYongmeng() {
     Sleep, 500
     Send {Click 1723, 431}
     Sleep, 700
-    Send {Click}
-    Sleep, 400
-    Send {Click}
-    Sleep, 400
-    Send {Click}
-    Sleep, 400
-    Send {Click}
-    Sleep, 400
-    Send {Click}
-    Sleep, 400
-    Send {Click}
-    Sleep, 400
+    Loop, 6
+    {
+        Send {Click}
+        Sleep, 400
+    }
     SendInput, f
     ToolTip, 交好咯
     Sleep, 1000
@@ -57,10 +45,10 @@ handYongmeng() {
 }
 
 
-
+; 下面坐标可以 F1 取色然后参照修改
 yujianAuto:
     timeFlag := 1
-    if ( GetColor(945, 978) != "0x232323" ) {
+    if ( GetColor(945, 978) != "0x232323" ) { ;技能2识别，如果亮了说明进入战斗，开始你的表演
         if ( GetColor(857, 973) == "0x848BD2" ) ;(TAB可用, 分辨率 1080p)
         {
             SendInput, {Tab}
@@ -82,18 +70,18 @@ yujianAuto:
             Sleep, 200
         }
     }
-    if ( GetColor(1124, 802) == "0x4C3A27" ) ;(捡东西, 分辨率 1080p)
+    if ( GetColor(1124, 802) == "0x4C3A27" ) ;(捡东西, 分辨率 1080p) f亮了就快点她
     {
         SendInput, f
         Sleep, 20
     }
-    if ( GetColor(1706, 740) != "0xFFFFFF" && isHanding != 1 ) ;(任务没接到, 分辨率 1080p)
+    if ( GetColor(1706, 740) != "0xFFFFFF" && isHanding != 1 ) ;(被怪攻击了任务没接到没关系再接一次, 分辨率 1080p) 识别勇猛任务栏白色亮点出来了没有
     {
         getYongmeng()
         Sleep, 20000
     }
     ; 交任务
-    if ( GetColor(1723, 431) == "0xB85F22" )
+    if ( GetColor(1723, 431) == "0xB85F22" ) ;任务小书图标出来来就点她
     {
         isHanding := 1
         handYongmeng()
@@ -103,6 +91,7 @@ yujianAuto:
     } 
 return
 
+; 手动接任务
 Alt & F3::
     getYongmeng()
 return
