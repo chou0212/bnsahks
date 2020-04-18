@@ -49,7 +49,7 @@ timer := {}
 
 ; 下面坐标可以 F1 取色然后参照修改
 yujianAuto:
-    timer.yujianAuto := 1
+    if (timer.yujianAuto != 1) { return }
     if ( GetColor(1124, 802) == "0x4C3A27" ) ;(捡东西, 分辨率 1080p) f亮了就快点她
     {
         SendInput, f
@@ -104,6 +104,7 @@ Alt & F1::
         timer.yujianAuto := 0
     } else {
         SetTimer, yujianAuto, 0
+        timer.yujianAuto := 1
     }
 return
 
