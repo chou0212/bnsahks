@@ -1,5 +1,5 @@
-#IfWinExist ahk_class LaunchUnrealUWindowsClient
-DetectHiddenWindows, On
+#IfWinActive ahk_class LaunchUnrealUWindowsClient
+; DetectHiddenWindows, On
 
 ;抓取颜色函数，在上面脚本中调用。
 GetColor(x,y)
@@ -13,7 +13,7 @@ GetColor(x,y)
 getYongmeng() {
     SendInput, j
     Sleep, 500
-    Send {Click 1037, 775}
+    Send {Click 1037, 734}
     Sleep, 600
     Loop, 5
     {
@@ -45,17 +45,23 @@ handYongmeng() {
     return
 }
 
+timer := {}
 
 ; 下面坐标可以 F1 取色然后参照修改
 yujianAuto:
-    timeFlag := 1
+    timer.yujianAuto := 1
+    if ( GetColor(1124, 802) == "0x4C3A27" ) ;(捡东西, 分辨率 1080p) f亮了就快点她
+    {
+        SendInput, f
+        Sleep, 20
+    }
     if ( GetColor(945, 978) != "0x232323" ) { ;技能2识别，如果亮了说明进入战斗，开始你的表演
         if ( GetColor(857, 973) == "0x848BD2" ) ;(TAB可用, 分辨率 1080p)
         {
             SendInput, {Tab}
             Sleep, 20
         }
-        if ( GetColor(1119, 974) != "0x626262" ) ;(右键技能, 分辨率 1080p)
+        if ( GetColor(1120, 974) != "0x585858" ) ;(右键技能, 分辨率 1080p)
         {
             SendInput, t
             Sleep, 50
@@ -70,27 +76,22 @@ yujianAuto:
             SendInput, 4
             Sleep, 200
         }
+    } else {
+        ; 交任务
+        if ( GetColor(1723, 431) == "0xB85F22" ) ;任务小书图标出来来就点她
+        {
+            handYongmeng()
+            Sleep, 1000
+            getYongmeng()
+        }
+        else if ( GetColor(1713, 787) != "0x32A0FF" ) ;(被怪攻击了任务没接到没关系再接一次, 分辨率 1080p) 识别勇猛蓝色进度条出来没有
+        {
+            getYongmeng()
+            Sleep, 5000
+        }
     }
-    if ( GetColor(1124, 802) == "0x4C3A27" ) ;(捡东西, 分辨率 1080p) f亮了就快点她
-    {
-        SendInput, f
-        Sleep, 20
-    }
-    if ( GetColor(1706, 740) != "0xFFFFFF" && isHanding != 1 ) ;(被怪攻击了任务没接到没关系再接一次, 分辨率 1080p) 识别勇猛任务栏白色亮点出来了没有
-    {
-        getYongmeng()
-        Sleep, 20000
-    }
-    ; 交任务
-    if ( GetColor(1723, 431) == "0xB85F22" ) ;任务小书图标出来来就点她
-    {
-        isHanding := 1
-        handYongmeng()
-        Sleep, 1000
-        getYongmeng()
-        isHanding := 0
-    } 
-return
+    return
+
 
 ; 手动接任务
 Alt & F3::
@@ -98,9 +99,9 @@ Alt & F3::
 return
 
 Alt & F1::
-    if ( timeFlag == 1) {
+    if ( timer.yujianAuto == 1) {
         SetTimer, yujianAuto, off
-        timeFlag := 0
+        timer.yujianAuto := 0
     } else {
         SetTimer, yujianAuto, 0
     }
