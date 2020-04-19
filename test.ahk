@@ -129,7 +129,6 @@ TaskAuto:
     ImageSearch, FoundX, FoundY, 1675, 320, 1900, 990, %A_WorkingDir%\task-done.bmp
     if (ErrorLevel == 0) {
         handYongmeng(FoundX, FoundY)
-        MsgBox FoundX
         Sleep, 1000
         getYongmeng()
         return
