@@ -129,17 +129,18 @@ TaskAuto:
     ImageSearch, FoundX, FoundY, 1675, 320, 1900, 990, %A_WorkingDir%\task-done.bmp
     if (ErrorLevel == 0) {
         handYongmeng(FoundX, FoundY)
+        MsgBox FoundX
         Sleep, 1000
         getYongmeng()
-    } else ;(被怪攻击了任务没接到没关系再接一次, 分辨率 1080p) 识别勇猛蓝色进度条出来没有
-    {
-        PixelSearch, Px, Py, 1675, 320, 1900, 990, 0x3BA8FF, 0, Fast
-        if ErrorLevel
-            return
-        else
-            getYongmeng()
-            Sleep, 1000
+        return
     }
+    ;(被怪攻击了任务没接到没关系再接一次, 分辨率 1080p) 识别勇猛蓝色进度条出来没有
+    PixelSearch, Px, Py, 1675, 320, 1900, 990, 0x3BA8FF, 0, Fast
+    if ErrorLevel
+        return
+    else
+        getYongmeng()
+        Sleep, 1000
     return
 
 ; 手动接任务
@@ -190,7 +191,7 @@ Alt & F1::
         timer.ymAuto := 0
     } else {
         SetTimer, SkillAuto, 0
-        SetTimer, TaskAuto, 10000
+        SetTimer, TaskAuto, 5000
         timer.ymAuto := 1
     }
 return
