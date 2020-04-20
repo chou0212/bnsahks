@@ -34,7 +34,7 @@ RButton::
     return
 
 RButton Up::
-    SetTimer, SkillAuto, 0
-    timer.skAuto := 1
+    SetTimer, SkillAuto, off
+    timer.skAuto := 0
     SoundPlay *48
     return
