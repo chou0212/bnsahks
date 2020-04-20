@@ -25,7 +25,7 @@ getYongmeng() {
     SendInput, j
     Sleep, 500
     Send {Click 924, 284} ;入手书信tab页
-    Send {Click 1037, 734}
+    Send {Click 1032, 733}
     Sleep, 600
     Loop, 5
     {
@@ -134,12 +134,16 @@ TaskAuto:
         return
     }
     ;(被怪攻击了任务没接到没关系再接一次, 分辨率 1080p) 识别勇猛蓝色进度条出来没有
-    PixelSearch, Px, Py, 1675, 320, 1900, 990, 0x3BA8FF, 0, Fast
-    if ErrorLevel
-        return
-    else
-        getYongmeng()
-        Sleep, 1000
+    ; PixelSearch, Px, Py, 1710, 731, 1714, 734, 0x3BA8FF, 0, Fast
+    ; ToolTip, %ErrorLevel%
+    ; if (ErrorLevel == 1) {
+    ;     getYongmeng()
+    ;     Sleep, 1000
+    ; }
+    if ( GetColor(1713, 732) != "0x3BA8FF" ) {
+         getYongmeng()
+         Sleep, 1000
+    }
     return
 
 ; 手动接任务
@@ -190,7 +194,7 @@ Alt & F1::
         timer.ymAuto := 0
     } else {
         SetTimer, SkillAuto, 0
-        SetTimer, TaskAuto, 5000
+        SetTimer, TaskAuto, 15000
         timer.ymAuto := 1
     }
 return
