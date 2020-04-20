@@ -1,6 +1,6 @@
 #IfWinActive ahk_class LaunchUnrealUWindowsClient
 
-MsgBox, 鼠标右键按下开始表演哦，松开停止
+MsgBox, 榧犳爣鍙抽敭鎸変笅寮�濮嬭〃婕斿摝锛屾澗寮�鍋滄
 
 timer := {}
 
@@ -36,5 +36,5 @@ RButton::
 RButton Up::
     SetTimer, SkillAuto, off
     timer.skAuto := 0
-    SoundPlay *48
+    SoundPlay *-1
     return
