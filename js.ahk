@@ -1,10 +1,9 @@
 #IfWinActive ahk_class LaunchUnrealUWindowsClient
 
-MsgBox, 榧犳爣鍙抽敭鎸変笅寮�濮嬭〃婕斿摝锛屾澗寮�鍋滄
+MsgBox, 鼠标右键按下开始表演哦，松开停止
 
 timer := {}
 
-; 涓嬮潰鍧愭爣鍙互 F1 鍙栬壊鐒跺悗鍙傜収淇敼
 SkillAuto:
     if (timer.skAuto != 1) { 
         return 
