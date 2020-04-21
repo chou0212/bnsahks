@@ -1,6 +1,6 @@
 #IfWinActive ahk_class LaunchUnrealUWindowsClient
 
-MsgBox, 榧犳爣鍙抽敭鎸変笅寮�濮嬭〃婕斿摝锛屾澗寮�鍋滄
+MsgBox, ALT+F2开启/关闭，鼠标右键按下开始表演哦，松开停止
 
 timer := {}
 
@@ -20,21 +20,29 @@ SkillAuto:
     Sleep, 50
     return
 
-
 RButton::
     if ( timer.skAuto == 1) {
         SetTimer, SkillAuto, off
-        SoundPlay *-1
         timer.skAuto := 0
     } else {
         SetTimer, SkillAuto, 0
         timer.skAuto := 1
-        SoundPlay *48
     }
     return
 
 RButton Up::
+    if (timer.off) {
+        return
+    }
     SetTimer, SkillAuto, off
-    SoundPlay *-1
     timer.skAuto := 0
     return
+
+Alt & F2::
+    Suspend
+    if (A_IsSuspended) {
+        SoundPlay *64
+    } else {
+        SoundPlay *16
+    }
+return
