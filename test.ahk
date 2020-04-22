@@ -25,11 +25,19 @@ getYongmeng() {
     SendInput, j
     Sleep, 500
     Send {Click 924, 284} ;入手书信tab页
-    Send {Click 1032, 733}
+    Sleep, 2000
+    PixelSearch, Rx, Ry, 800, 500, 900, 900, 0x3191C9, 3, Fast RGB
+    if (ErrorLevel == 1) {
+        ToolTip, 找不到勇猛
+        return
+    }
+    targetX := Rx + 204
+    ToolTip, %targetX%， %Ry%
+    Send {Click %targetX%, %Ry%}
     Sleep, 600
     Loop, 5
     {
-        Send {Click}
+        SendInput, Space
         Sleep, 600
     }
     SendInput, f
@@ -47,7 +55,7 @@ handYongmeng(ix, iy) {
     Sleep, 700
     Loop, 6
     {
-        Send {Click}
+        SendInput, Space
         Sleep, 400
     }
     SendInput, f
@@ -89,6 +97,11 @@ sf.color := "0x463220"
 
 timer := {}
 
+mosterDetected() {
+    ret := GetColor(s2.x, s2.y) == s2.color
+    return ret
+}
+
 MsgBox, 0, , 鼠标移动到需要释放的技能上面按下Alt+对应技能键取色，取好后alt+f1开始
 
 ; 下面坐标可以 F1 取色然后参照修改
@@ -101,7 +114,7 @@ SkillAuto:
         SendInput, f
         Sleep, 20
     }
-    if ( GetColor(s2.x, s2.y) != s2.color ) { ;技能2识别，如果亮了说明进入战斗，开始你的表演
+    if ( mosterDetected() ) { ;技能2识别，如果亮了说明进入战斗，开始你的表演
         if ( GetColor(sTab.x, sTab.y) == sTab.color ) ;(TAB可用, 分辨率 1080p)
         {
             SendInput, {Tab}
@@ -126,6 +139,10 @@ SkillAuto:
     return
 
 TaskAuto:
+    if ( mosterDetected() )  {
+        return
+    }
+    
     ImageSearch, FoundX, FoundY, 1675, 320, 1900, 990, %A_WorkingDir%\task-done.bmp
     if (ErrorLevel == 0) {
         handYongmeng(FoundX, FoundY)
@@ -134,16 +151,16 @@ TaskAuto:
         return
     }
     ;(被怪攻击了任务没接到没关系再接一次, 分辨率 1080p) 识别勇猛蓝色进度条出来没有
-    ; PixelSearch, Px, Py, 1710, 731, 1714, 734, 0x3BA8FF, 0, Fast
-    ; ToolTip, %ErrorLevel%
-    ; if (ErrorLevel == 1) {
-    ;     getYongmeng()
-    ;     Sleep, 1000
-    ; }
-    if ( GetColor(1713, 732) != "0x3BA8FF" ) {
-         getYongmeng()
-         Sleep, 1000
+    PixelSearch, Px, Py, 1710, 666, 1714, 799, 0x3BA8FF, 1, Fast RGB
+    ToolTip, %ErrorLevel%
+    if (ErrorLevel == 1) {
+        getYongmeng()
+        Sleep, 1000
     }
+    ; if ( GetColor(1713, 732) != "0x3BA8FF" ) {
+    ;      getYongmeng()
+    ;      Sleep, 1000
+    ; }
     return
 
 ; 手动接任务
