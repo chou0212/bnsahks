@@ -68,7 +68,7 @@ getYongmeng() {
     Sleep, 300
     ToolTip, % wowpwp sp.x
     Send {Click sp.x, sp.y} ;入手书信tab页
-    Sleep, 1000
+    Sleep, 2000
 
     searchAreaX1 := sp.x - 150
     searchAreaY1 := sp.y + 100
@@ -78,6 +78,7 @@ getYongmeng() {
     PixelSearch, Rx, Ry, %searchAreaX1%, %searchAreaY1%, %searchAreaX2%, %searchAreaY2%, 0x3191C9, 3, Fast RGB
     if (ErrorLevel == 1) {
         TrayTip, 清漪的小提示, 找不到勇猛怪我咯
+        SendInput, j
         return
     }
     targetX := Rx + 204
