@@ -23,7 +23,7 @@ getPosAndColor() {
 ;接勇猛咯 1080p
 getYongmeng() {
     SendInput, j
-    Sleep, 500
+    Sleep, 300
     Send {Click 924, 284} ;入手书信tab页
     Sleep, 2000
     PixelSearch, Rx, Ry, 800, 500, 900, 900, 0x3191C9, 3, Fast RGB
@@ -37,7 +37,7 @@ getYongmeng() {
     Sleep, 600
     Loop, 5
     {
-        SendInput, Space
+        SendInput, {Space}
         Sleep, 600
     }
     SendInput, f
@@ -50,12 +50,12 @@ getYongmeng() {
 ; 交勇猛 1080p
 handYongmeng(ix, iy) {
     SendInput, i
-    Sleep, 500
+    Sleep, 300
     Send {Click %ix%, %iy%}
     Sleep, 700
     Loop, 6
     {
-        SendInput, Space
+        SendInput, {Space}
         Sleep, 400
     }
     SendInput, f
@@ -98,7 +98,9 @@ sf.color := "0x463220"
 timer := {}
 
 mosterDetected() {
-    ret := GetColor(s2.x, s2.y) == s2.color
+    global s2
+    ret := GetColor(s2.x, s2.y) != s2.color
+    ToolTip, %ret%
     return ret
 }
 
@@ -114,7 +116,7 @@ SkillAuto:
         SendInput, f
         Sleep, 20
     }
-    if ( mosterDetected() ) { ;技能2识别，如果亮了说明进入战斗，开始你的表演
+    if mosterDetected() { ;技能2识别，如果亮了说明进入战斗，开始你的表演
         if ( GetColor(sTab.x, sTab.y) == sTab.color ) ;(TAB可用, 分辨率 1080p)
         {
             SendInput, {Tab}
@@ -139,11 +141,18 @@ SkillAuto:
     return
 
 TaskAuto:
-    if ( mosterDetected() )  {
+    if mosterDetected()  {
         return
     }
-    
-    ImageSearch, FoundX, FoundY, 1675, 320, 1900, 990, %A_WorkingDir%\task-done.bmp
+
+    PixelSearch, Rx, Ry, 1675, 320, 1800, 990, 0x7E4429, 3, Fast RGB
+    if (ErrorLevel == 1) {
+        ToolTip, 找不到交任务图标
+    }
+    siblingY := Ry + 1
+    PixelSearch, FoundX, FoundY, 1675, %siblingY%, 1800, 990, 0xD3AB54, 3, Fast RGB
+
+    ; ImageSearch, FoundX, FoundY, 1675, 320, 1900, 990, %A_WorkingDir%\task-done.bmp
     if (ErrorLevel == 0) {
         handYongmeng(FoundX, FoundY)
         Sleep, 1000
