@@ -153,7 +153,7 @@ TaskAuto:
     }
 
     if ( GetColor(si.x, si.y) == si.color  ) {
-        handYongmeng(FoundX, FoundY)
+        handYongmeng(si.x, si.y)
         Sleep, 1000
         getYongmeng()
         return
