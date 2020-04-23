@@ -117,7 +117,7 @@ handYongmeng(ix, iy) {
 mosterDetected() {
     global s2
     ret := GetColor(s2.x, s2.y) != s2.color
-    TrayTip, 清漪的小提示, %ret%
+    TrayTip, 清漪的小提示, 各单位请注意，目标出现了！
     return ret
 }
 
@@ -175,7 +175,7 @@ TaskAuto:
 
     ;(被怪攻击了任务没接到没关系再接一次, 分辨率 1080p) 识别勇猛蓝色进度条出来没有
     PixelSearch, Px, Py, 1710, 666, 1714, 799, 0x3BA8FF, 1, Fast RGB
-    TrayTip, 清漪的小提示, %ErrorLevel%
+    TrayTip, 清漪的小提示, 再接一次任务
     if (ErrorLevel == 1) {
         getYongmeng()
         Sleep, 1000
@@ -254,5 +254,5 @@ $F1::
     MouseGetPos, MouseX, MouseY
     PixelGetColor, color, %MouseX%, %MouseY%, RGB
     StringRight color,color,10 ;
-    TrayTip, 清漪的小提示, %MouseX%，%MouseY%颜色是：%color%
+    ToolTip, %MouseX%，%MouseY%颜色是：%color%
 return
