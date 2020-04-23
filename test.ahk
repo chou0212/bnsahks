@@ -95,6 +95,11 @@ sf.x := 1121
 sf.y := 811
 sf.color := "0x463220"
 
+si := {}
+si.x := 1728
+si.y := 407
+si.color := "0xB66A31"
+
 timer := {}
 
 mosterDetected() {
@@ -114,6 +119,8 @@ SkillAuto:
     if ( GetColor(sf.x, sf.y) == sf.color ) ;(捡东西, 分辨率 1080p) f亮了就快点她
     {
         SendInput, f
+        Sleep, 20
+        SendInput, y
         Sleep, 20
     }
     if mosterDetected() { ;技能2识别，如果亮了说明进入战斗，开始你的表演
@@ -145,12 +152,7 @@ TaskAuto:
         return
     }
 
-    PixelSearch, Rx, Ry, 1675, 320, 1800, 990, 0x7E4429, 3, Fast RGB
-    if (ErrorLevel == 1) {
-        ToolTip, 找不到交任务图标
-    }
-    siblingY := Ry + 1
-    else if ( GetColor(Rx, siblingY) == "0xD3AB54" ) {
+    if ( GetColor(si.x, si.y) == si.color  ) {
         handYongmeng(FoundX, FoundY)
         Sleep, 1000
         getYongmeng()
@@ -211,6 +213,11 @@ Alt & f::
     res := getPosAndColor()
     MsgBox, % 拾取F技能色是 res.color
     sf := res.Clone()
+
+Alt & i::
+    res := getPosAndColor()
+    MsgBox, % 交任务图标色是 res.color
+    si := res.Clone()
 return
 
 Alt & F1::
