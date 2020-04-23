@@ -150,15 +150,15 @@ TaskAuto:
         ToolTip, 找不到交任务图标
     }
     siblingY := Ry + 1
-    PixelSearch, FoundX, FoundY, 1675, %siblingY%, 1800, 990, 0xD3AB54, 3, Fast RGB
-
-    ; ImageSearch, FoundX, FoundY, 1675, 320, 1900, 990, %A_WorkingDir%\task-done.bmp
-    if (ErrorLevel == 0) {
+    else if ( GetColor(Rx, siblingY) == "0xD3AB54" ) {
         handYongmeng(FoundX, FoundY)
         Sleep, 1000
         getYongmeng()
         return
     }
+
+    ; ImageSearch, FoundX, FoundY, 1675, 320, 1900, 990, %A_WorkingDir%\task-done.bmp
+
     ;(被怪攻击了任务没接到没关系再接一次, 分辨率 1080p) 识别勇猛蓝色进度条出来没有
     PixelSearch, Px, Py, 1710, 666, 1714, 799, 0x3BA8FF, 1, Fast RGB
     ToolTip, %ErrorLevel%
