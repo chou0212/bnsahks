@@ -198,49 +198,50 @@ return
 
 Alt & TAB::
     res := getPosAndColor()
-    MsgBox, % 已保存好tab技能哦 TAB技能色是 res.y
+    MsgBox, % "已保存好tab技能哦 TAB技能色是" . res.y
     sTab := res.Clone()
     return
 
 Alt & 2::
     res := getPosAndColor()
-    MsgBox, % 已保存好2技能哦 2技能色是 res.color
+    MsgBox, % "已保存好2技能哦 2技能色是" . res.color
     s2 := res.Clone()
 return
 
 Alt & 4::
     res := getPosAndColor()
-    MsgBox, % 已保存好4技能哦 4技能色是 res.color
+    MsgBox, % "已保存好4技能哦 4技能色是" . res.color
     s4 := res.Clone()
 return
 
 Alt & v::
     res := getPosAndColor()
-    MsgBox, % 已保存好v技能哦 v技能色是 res.color
+    MsgBox, % "已保存好v技能哦 v技能色是" . res.color
     sv := res.Clone()
 return
 
 Alt & t::
     res := getPosAndColor()
-    MsgBox, % 已保存t技能哦 右键技能色是 res.color
+    MsgBox, % "已保存t技能哦 右键技能色是" . res.color
     st := res.Clone()
 return
 
 Alt & f::
     res := getPosAndColor()
-    MsgBox, % 已保存f 拾取F技能色是 res.color
+    MsgBox, % "已保存f 拾取F技能色是" . res.color
     sf := res.Clone()
+return
 
 Alt & i::
     res := getPosAndColor()
-    MsgBox, % 已保存任务图标信息，交任务图标色是 res.color
+    MsgBox, % "已保存任务图标信息，交任务图标色是" . res.color
     si := res.Clone()
+return
 
 Alt & p::
     res := getPosAndColor()
-    MsgBox, % 已保存任务面板入手书卷信息 res.x
+    MsgBox, % "已保存任务面板入手书卷信息" . res.x
     sp := res.Clone()
-
 return
 
 Alt & F1::
