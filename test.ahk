@@ -175,9 +175,9 @@ TaskAuto:
 
     ;(被怪攻击了任务没接到没关系再接一次, 分辨率 1080p) 识别勇猛蓝色进度条出来没有
     PixelSearch, Px, Py, 1710, 666, 1714, 799, 0x3BA8FF, 1, Fast RGB
-    TrayTip, 清漪的小提示, 再接一次任务
     if (ErrorLevel == 1) {
         getYongmeng()
+        TrayTip, 清漪的小提示, 再接一次任务
         Sleep, 1000
     }
     ; if ( GetColor(1713, 732) != "0x3BA8FF" ) {
