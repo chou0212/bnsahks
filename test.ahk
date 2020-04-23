@@ -65,7 +65,7 @@ getPosAndColor() {
 getYongmeng() {
     global sp
     SendInput, j
-    Sleep, 80
+    Sleep, 800
 
     spx := sp.x
     spy := sp.y
@@ -74,12 +74,12 @@ getYongmeng() {
     Send {Click %spx%, %spy%} ;入手书信tab页
     Sleep, 1000
 
-    searchAreaX1 := sp.x - 150
-    searchAreaY1 := sp.y + 100
-    searchAreaX2 := sp.x - 20
-    searchAreaY2 := sp.x + 600
+    searchAreaX1 := spx - 150
+    searchAreaY1 := spy + 100
+    searchAreaX2 := spx - 20
+    searchAreaY2 := spy + 600
 
-    PixelSearch, Rx, Ry, %searchAreaX1%, %searchAreaY1%, %searchAreaX2%, %searchAreaY2%, 0x3191C9, 3, Fast RGB
+    PixelSearch, Rx, Ry, %searchAreaX1%, %searchAreaY1%, %searchAreaX2%, %searchAreaY2%, 0x3191C9, 10, Fast RGB
     if (ErrorLevel == 1) {
         TrayTip, 清漪的小提示, 找不到勇猛怪我咯
         SendInput, j
