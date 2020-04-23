@@ -65,10 +65,10 @@ getPosAndColor() {
 getYongmeng() {
     global sp
     SendInput, j
-    Sleep, 300
+    Sleep, 800
     ToolTip, % wowpwp sp.x
     Send {Click sp.x, sp.y} ;入手书信tab页
-    Sleep, 2000
+    Sleep, 1000
 
     searchAreaX1 := sp.x - 150
     searchAreaY1 := sp.y + 100
