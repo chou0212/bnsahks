@@ -1,8 +1,17 @@
 #IfWinActive ahk_class LaunchUnrealUWindowsClient
 
+timer := {}
+skInterval := 20    
+
 MsgBox, ALT+F2开启/关闭，鼠标右键按下开始表演哦，松开停止
 
-timer := {}
+InputBox, inputSkInterval, 设置技能间隔, 期望技能间隔（单位毫秒）., , 400, 200
+if ErrorLevel
+    MsgBox, 那就脸滚键盘吧.
+else
+    skInterval := inputSkInterval
+
+Suspend
 
 SkillAuto:
     if (timer.skAuto != 1) {
@@ -11,13 +20,13 @@ SkillAuto:
     SendInput, {Tab}
     Sleep, 100
     SendInput, v
-    Sleep, 20
+    Sleep, %skInterval%
     SendInput, 4
-    Sleep, 20
+    Sleep, %skInterval%
     SendInput, t
-    Sleep, 20
+    Sleep, %skInterval%
     SendInput, f
-    Sleep, 20
+    Sleep, %skInterval%
     SendInput, r
     Sleep, 50
     return
